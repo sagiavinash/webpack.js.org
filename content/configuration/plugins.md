@@ -24,4 +24,18 @@ plugins: [
 
 A more complex example, using multiple plugins, might look something like this:
 
+```js
+plugins: [
+  // Build optimization plugins
+  new webpack.optimize.CommonsChunkPlugin({ name: 'vendor', filename: 'vendor-[hash].min.js' }),
+  new webpack.optimize.UglifyJsPlugin({ minimize: true, compress: { warnings: false, drop_console: false } }),
+  new ExtractTextPlugin({ filename: 'build.min.css', allChunks: true }),
+  new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+  // Compile time plugins
+  new webpack.DefinePlugin({ 'process.env.NODE_ENV': '"production"' }),
+  // Webpack dev server enhancements
+  new DashboardPlugin(),
+  new webpack.HotModuleReplacementPlugin(),
+],
+```
 ?> Add a more detailed example
